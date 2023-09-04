@@ -1,11 +1,12 @@
 import Error from "@/components/_child/error";
-import Spinner from "@/components/_child/spinner";
+import siteMetadata from "@/data/siteMetadata";
 import ListLayout from "@/layouts/ListLayout";
 import { baseUrl } from "@/lib/constant";
 import axios from "axios";
-import { useState } from "react";
 
-export const POSTS_PER_PAGE = 5;
+import { PageSEO } from "@/components/SEO";
+
+export const POSTS_PER_PAGE = 10;
 
 export async function getStaticProps() {
   try {
@@ -14,26 +15,21 @@ export async function getStaticProps() {
 
     return {
       props: { posts },
-      revalidate: 3600,
+      revalidate: 60,
     };
   } catch (err) {
     return {
       props: { error: true },
-      revalidate: 3600,
+      revalidate: 60,
     };
   }
 }
 
 export default function Blog({ posts, error }) {
-  const [loading, setLoading] = useState(!posts && !error);
-
   if (error) {
     return <Error />;
   }
 
-  if (loading) {
-    return <Spinner />;
-  }
   const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE);
   const pagination = {
     currentPage: 1,
@@ -41,6 +37,10 @@ export default function Blog({ posts, error }) {
   };
   return (
     <>
+      <PageSEO
+        title={`Blog - ${siteMetadata.author}`}
+        description={siteMetadata.description}
+      />
       <ListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}

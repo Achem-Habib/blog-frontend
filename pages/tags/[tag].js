@@ -1,9 +1,9 @@
+import { TagSEO } from "@/components/SEO";
 import Error from "@/components/_child/error";
-import Spinner from "@/components/_child/spinner";
+import siteMetadata from "@/data/siteMetadata";
 import ListLayout from "@/layouts/ListLayout";
 import { baseUrl } from "@/lib/constant";
 import axios from "axios";
-import { useState } from "react";
 
 export async function getStaticPaths() {
   const res = await axios.get(`${baseUrl}/tags/`);
@@ -20,12 +20,12 @@ export async function getStaticProps({ params }) {
     const posts = res.data;
     return {
       props: { posts: posts, tag: params.tag },
-      revalidate: 3600,
+      revalidate: 60,
     };
   } catch (err) {
     return {
       props: { error: true },
-      revalidate: 3600,
+      revalidate: 60,
     };
   }
 }
@@ -33,18 +33,17 @@ export async function getStaticProps({ params }) {
 export default function Tag({ posts, tag, error }) {
   // Capitalize first letter and convert space to dash
   const title = tag;
-  const [loading, setLoading] = useState(!posts && !error);
 
   if (error) {
     return <Error />;
   }
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <>
+      <TagSEO
+        title={`${tag} - ${siteMetadata.author}`}
+        description={`${tag} tags - ${siteMetadata.author}`}
+      />
       <ListLayout posts={posts} title={title} />
     </>
   );

@@ -6,19 +6,25 @@ import Tag from "./Tag";
 export default function Post({ post }) {
   const { id, slug, date, title, summary, tags, image } = post;
 
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + "...";
+    }
+    return text;
+  }
+
   return (
     <div
       key={id}
       className="bg-white dark:bg-gray-800 shadow max-w-sm rounded-lg"
     >
-      <div className="relative h-48">
+      <div className="relative ">
         <Image
           src={image}
           alt="Picture of the blog image"
-          fill
-          sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
+          width={300}
+          height={200}
+          className="w-full aspect-auto"
         />
       </div>
 
@@ -35,7 +41,7 @@ export default function Post({ post }) {
           {title}
         </Link>
         <p className="text-sm leading-5 text-gray-500 dark:text-gray-400 mb-4">
-          {summary}
+          {truncateText(summary, 200)}
         </p>
         <div className="flex flex-wrap justify-between text-sm leading-5 font-medium text-gray-900 dark:text-gray-400">
           <dl>

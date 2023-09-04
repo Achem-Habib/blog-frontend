@@ -1,6 +1,8 @@
+import Logo from "@/data/logo.svg";
+import siteMetadata from "@/data/siteMetadata";
+import Image from "next/image";
 import Link from "next/link";
 import headerNavLinks from "../data/headerNavLinks";
-import siteMetadata from "../data/siteMetadata";
 import Footer from "./Footer";
 import MobileNav from "./MobileNav";
 import SectionContainer from "./SectionContainer";
@@ -14,8 +16,11 @@ const LayoutWrapper = ({ children }) => {
           <div>
             <Link href="/" aria-label={siteMetadata.headerTitle}>
               <div className="flex items-center justify-between">
+                <div className="mr-3">
+                  <Image src={Logo} alt="website logo" />
+                </div>
                 {typeof siteMetadata.headerTitle === "string" ? (
-                  <div className="hidden h-6 text-2xl font-semibold sm:block">
+                  <div className="hidden sm:block h-6 text-2xl font-semibold ">
                     {siteMetadata.headerTitle}
                   </div>
                 ) : (
@@ -30,7 +35,7 @@ const LayoutWrapper = ({ children }) => {
                 <Link
                   key={link.title}
                   href={link.href}
-                  className="p-1 font-medium text-black dark:text-gray-100 sm:p-4"
+                  className="px-3 py-2 mr-5 bg-blue-700 hover:bg-blue-800 rounded-md font-medium text-slate-100 dark:text-gray-100 "
                 >
                   {link.title}
                 </Link>

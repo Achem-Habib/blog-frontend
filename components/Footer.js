@@ -1,5 +1,7 @@
+import Newsletter from "@/components/_child/Newsletter";
+import SocialIcon from "@/components/social-icons";
+import siteMetadata from "@/data/siteMetadata";
 import Link from "next/link";
-import FooterNewsletter from "./_child/footerNewsletter";
 
 const icons = {
   facebook: (
@@ -62,17 +64,21 @@ export default function Footer() {
   return (
     <footer className="flex flex-col gap-y-6 mt-20 pt-6 pb-12 border-t border-slate-200 dark:border-slate-400">
       <div className=" flex flex-col items-center gap-y-2">
-        <div className="  text-2xl font-bold">TailwindBlog</div>
+        <div className="  text-2xl font-bold">Biotech Info</div>
         <div className="mb-3 flex space-x-4">
-          <Link href="#">{icons.mail}</Link>
-          <Link href="#">{icons.facebook}</Link>
-          <Link href="#">{icons.github}</Link>
-          <Link href="#">{icons.linkedin}</Link>
-          <Link href="#">{icons.twitter}</Link>
+          <SocialIcon
+            kind="mail"
+            href={`mailto:${siteMetadata.email}`}
+            size="6"
+          />
+          <SocialIcon kind="github" href={siteMetadata.github} size="6" />
+          <SocialIcon kind="facebook" href={siteMetadata.facebook} size="6" />
+
+          <SocialIcon kind="linkedin" href={siteMetadata.linkedin} size="6" />
         </div>
       </div>
       <div className="flex items-center justify-center pt-4">
-        <FooterNewsletter></FooterNewsletter>
+        <Newsletter />
       </div>
 
       <div className="flex flex-col md:flex-row gap-x-4 gap-y-2 items-center justify-center mx-auto">

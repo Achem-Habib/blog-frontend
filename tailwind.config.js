@@ -99,7 +99,7 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme("colors.gray.300"),
+            color: theme("colors.gray.200"),
             a: {
               color: theme("colors.primary.500"),
               "&:hover": {
@@ -125,13 +125,13 @@ module.exports = {
               color: theme("colors.gray.100"),
             },
             pre: {
-              backgroundColor: theme("colors.gray.800"),
+              backgroundColor: theme("colors.gray.600"),
             },
             code: {
               backgroundColor: theme("colors.gray.800"),
             },
             details: {
-              backgroundColor: theme("colors.gray.800"),
+              backgroundColor: theme("colors.gray.700"),
             },
             hr: { borderColor: theme("colors.gray.700") },
             "ol li::marker": {
